@@ -1,6 +1,6 @@
-@extends('master')
+@extends('layouts.admin')
 
-@section('content')
+@section('main-content')
 
 @if($message = Session::get('success'))
 
@@ -25,7 +25,7 @@
 				<th>Image</th>
 				<th>Name</th>
 				<th>Email</th>
-				<th>Gender</th>
+				<th>classe</th>
 				<th>Action</th>
 			</tr>
 			@if(count($data) > 0)
@@ -36,7 +36,7 @@
 						<td><img src="{{ asset('images/' . $row->enseignant_image) }}" width="75" /></td>
 						<td>{{ $row->enseignant_name }}</td>
 						<td>{{ $row->enseignant_email }}</td>
-						<td>{{ $row->enseignant_gender }}</td>
+						<td>{{ $row->classe }}</td>
 						<td>
 							<form method="post" action="{{ route('enseignants.destroy', $row->id) }}">
 								@csrf

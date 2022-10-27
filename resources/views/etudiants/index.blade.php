@@ -1,6 +1,7 @@
-@extends('master')
+@extends('layouts.admin')
 
-@section('content')
+@section('main-content')
+
 
 @if($message = Session::get('success'))
 
@@ -26,6 +27,7 @@
 				<th>Name</th>
 				<th>Email</th>
 				<th>Gender</th>
+				<th>Classe</th>
 				<th>Action</th>
 			</tr>
 			@if(count($data) > 0)
@@ -37,6 +39,7 @@
 						<td>{{ $row->etudiant_name }}</td>
 						<td>{{ $row->etudiant_email }}</td>
 						<td>{{ $row->etudiant_gender }}</td>
+						<td>{{ $row->enseignant->classe}}</td>
 						<td>
 							<form method="post" action="{{ route('etudiants.destroy', $row->id) }}">
 								@csrf
@@ -60,5 +63,4 @@
 		{!! $data->links() !!}
 	</div>
 </div>
-
 @endsection

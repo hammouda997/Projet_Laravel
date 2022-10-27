@@ -1,7 +1,7 @@
 
-@extends('master')
+@extends('layouts.admin')
 
-@section('content')
+@section('main-content')
 
 <div class="card">
 	<div class="card-header">
@@ -26,9 +26,9 @@
 			</div>
 		</div>
 		<div class="row mb-4">
-			<label class="col-sm-2 col-label-form"><b>enseignant Gender</b></label>
+			<label class="col-sm-2 col-label-form"><b>classe</b></label>
 			<div class="col-sm-10">
-				{{ $enseignant->enseignant_gender }}
+				{{ $enseignant->classe }}
 			</div>
 		</div>
 		<div class="row mb-4">
@@ -40,4 +40,4 @@
 	</div>
 </div>
 
-@endsection('content')
+@endsection('main-content')

@@ -1,7 +1,7 @@
 
-@extends('master')
+@extends('layouts.admin')
 
-@section('content')
+@section('main-content')
 
 <div class="card">
 	<div class="card-header">
@@ -37,7 +37,14 @@
 				<img src="{{ asset('images/' .  $etudiant->etudiant_image) }}" width="200" class="img-thumbnail" />
 			</div>
 		</div>
+		<div class="row mb-4">
+			<label class="col-sm-2 col-label-form"><b>Classe </b></label>
+			<div class="col-sm-10">
+				{{ $etudiant->enseignant->classe }}
+			</div>
+		</div>
 	</div>
 </div>
 
-@endsection('content')
+
+@endsection('main-content')

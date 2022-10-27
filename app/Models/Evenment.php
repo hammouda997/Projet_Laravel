@@ -9,8 +9,8 @@ use App\Models\Club;
 class Evenment extends Model
 {
     protected $table = 'evenments';
-    protected $primaryKey = 'idevenment';
-    protected $fillable = ['description', 'date_deb', 'date_fin','duree','club_id'];
+    protected $primaryKey = 'id';
+    protected $fillable = ['description', 'date_deb', 'duree','club_id'];
     use HasFactory;
     
     public function clubs()

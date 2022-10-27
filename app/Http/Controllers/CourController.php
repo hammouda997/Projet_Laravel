@@ -10,10 +10,20 @@ class CourController extends Controller
 {
     public function index()
     {
+   
         $cours = Cour::all();
         return view ('cours.index')->with('cours', $cours);
-    }
-    
+        
+        
+        
+        }
+        public function index1()
+        {
+            $cours = Cour::all();
+            return view ('CourF')->with('cours', $cours);
+        }
+
+
     public function create()
     {
         $matiere=Matiere::all();
@@ -23,9 +33,28 @@ class CourController extends Controller
   
     public function store(Request $request)
     {
-        $input = $request->all();
-        Cour::create($input);
-        return redirect('cour')->with('flash_message', 'cour Addedd!');  
+        $request->validate([  
+            'code'      =>  'required',
+            'nom'     =>  'required|string|min:2',
+            'duree'     =>  'required|integer|not_in:0'
+            ]);
+    
+      
+    
+            $cour = new Cour;
+    
+            $cour->code = $request->code;
+    
+            $cour->nom = $request->nom;
+    
+            $cour->duree = $request->duree;
+            $cour->file = $request->file;
+            $cour->matiere_id = $request->matiere_id;
+            
+    
+            $cour->save();
+    
+            return redirect()->route('cour.index')->with('success', 'cour Added successfully.'); 
     }
     
     public function show($id)
@@ -45,12 +74,12 @@ class CourController extends Controller
         $cour = Cour::find($id);
         $input = $request->all();
         $cour->update($input);
-        return redirect('cour')->with('flash_message', 'cour Updated!');  
+        return redirect()->route('cour.index')->with('success', 'cours modifié avec succès');
     }
   
     public function destroy($id)
     {
         Cour::destroy($id);
-        return redirect('cour')->with('flash_message', 'cour deleted!');  
+        return redirect()->route('cour.index')->with('success', 'cour supprimé !');
     }
 }

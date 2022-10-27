@@ -14,6 +14,11 @@ class ClubController extends Controller
         $clubs = Club::all();
         return view ('clubs.index')->with('clubs', $clubs);
     }
+    public function index1()
+    {
+        $clubs = Club::all();
+        return view ('clubF')->with('clubs', $clubs);
+    }
     
     public function create()
     {
@@ -22,9 +27,28 @@ class ClubController extends Controller
   
     public function store(Request $request)
     {
-        $input = $request->all();
-        Club::create($input);
-        return redirect('club')->with('flash_message', 'club Addedd!');  
+        $request->validate([  
+            'nomClub'      =>  'required',
+            'adresse'     =>  'required|string|min:5',
+            'nbrpart'     =>  'required|integer|not_in:0'
+            
+            ]);
+    
+      
+    
+            $club = new Club;
+    
+            $club->nomClub = $request->nomClub;
+    
+            $club->adresse = $request->adresse;
+    
+            $club->nbrpart = $request->nbrpart;
+         
+          
+    
+            $club->save();
+    
+        return redirect()->route('club.index')->with('success', 'Club Added successfully.');  
     }
     
     public function show($id)
@@ -44,12 +68,12 @@ class ClubController extends Controller
         $club = Club::find($id);
         $input = $request->all();
         $club->update($input);
-        return redirect('club')->with('flash_message', 'club Updated!');  
+        return redirect()->route('club.index')->with('success', 'Club updated successfully.');  
     }
   
     public function destroy($id)
     {
         Club::destroy($id);
-        return redirect('club')->with('flash_message', 'club deleted!');  
+        return redirect()->route('club.index')->with('success', 'Club deleted successfully.');  
     }
 }

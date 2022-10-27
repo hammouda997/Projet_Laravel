@@ -1,6 +1,6 @@
-@extends('master')
+@extends('layouts.admin')
 
-@section('content')
+@section('main-content')
 
 <div class="card">
 	<div class="card-header">Edit enseignant</div>
@@ -21,11 +21,15 @@
 				</div>
 			</div>
 			<div class="row mb-4">
-				<label class="col-sm-2 col-label-form">enseignant Gender</label>
+				<label class="col-sm-2 col-label-form">classe</label>
 				<div class="col-sm-10">
-					<select name="enseignant_gender" class="form-control">
-						<option value="Male">Male</option>
-						<option value="Female">Female</option>
+					<select name="classe" class="form-control">
+						<option value="1ère année">1ère année</option>
+						<option value="2ème année">2ème année</option>
+						<option value="3ème année">3ème année</option>
+						<option value="4ème année">4ème année</option>
+						<option value="5ème année">5ème année</option>
+						<option value="6ème année">6ème année</option>
 					</select>
 				</div>
 			</div>
@@ -49,4 +53,4 @@
 document.getElementsByName('enseignant_gender')[0].value = "{{ $enseignant->enseignant_gender }}";
 </script>
 
-@endsection('content
+@endsection('main-content')

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Etudiant;
+use App\Models\Enseignant;
 use Illuminate\Http\Request;
 
 class EtudiantController extends Controller
@@ -18,7 +19,8 @@ class EtudiantController extends Controller
     
     public function create()
     {
-        return view('etudiants.create');
+        $enseignant=Enseignant::all();
+        return view('etudiants.create',compact('enseignant'));
     }
 
  
@@ -40,6 +42,7 @@ class EtudiantController extends Controller
         $etudiant->etudiant_email = $request->etudiant_email;
         $etudiant->etudiant_gender = $request->etudiant_gender;
         $etudiant->etudiant_image = $file_name;
+        $etudiant->enseignant_id = $request->enseignant_id;
 
         $etudiant->save();
 
@@ -55,7 +58,8 @@ class EtudiantController extends Controller
     
     public function edit(Etudiant $etudiant)
     {
-        return view('etudiants.edit', compact('etudiant'));
+        $enseignant=Enseignant::all();
+        return view('etudiants.edit', compact('etudiant','enseignant'));
     }
 
     

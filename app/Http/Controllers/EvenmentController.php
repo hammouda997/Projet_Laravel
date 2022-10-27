@@ -13,21 +13,46 @@ class EvenmentController extends Controller
         $evenments = Evenment::all();
         return view ('evenments.index')->with('evenments', $evenments);
     }
+    public function index1()
+    {
+        $evenments = Evenment::all();
+        return view ('EventF')->with('evenments', $evenments);
+    }
     
     public function create()
     {
         $club=Club::all();
 
         return view('evenments.create',compact('club'));
+        
     }
   
     public function store(Request $request)
     {
-        $input = $request->all();
-        
-        Evenment::create($input);
-        return redirect('evenment')->with('flash_message', 'evenement Addedd!');  
+        $request->validate([  
+            'description'     =>  'required|string|min:4',
+            
+            'duree'     =>  'required|integer|not_in:0',
+            'date_deb'     =>  'required',
+            
+
+            ]);
+            $evenment = new Evenment;
+    
+            $evenment->description = $request->description;
+    
+            $evenment->date_deb = $request->date_deb;
+    
+            $evenment->duree = $request->duree;
+            
+            $evenment->club_id = $request->club_id;
+
+            $evenment->save();
+            return redirect()->route('evenment.index')->with('success', 'event Added successfully.'); 
+            
+
     }
+    
     
     public function show($id)
     {
@@ -47,13 +72,13 @@ class EvenmentController extends Controller
         $evenment = Evenment::find($id);
         $input = $request->all();
         $evenment->update($input);
-        return redirect('evenment')->with('flash_message', 'evenment Updated!');  
+        return redirect()->route('evenment.index')->with('success', 'event updated successfully.');  
     }
   
     public function destroy($id)
     {
         Evenment::destroy($id);
-        return redirect('evenment')->with('flash_message', 'Evenment deleted!');  
+        return redirect()->route('evenment.index')->with('success', 'event Deleted successfully.');  
     }
 }
 

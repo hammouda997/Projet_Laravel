@@ -38,7 +38,7 @@ class EnseignantController extends Controller
 
         $enseignant->enseignant_name = $request->enseignant_name;
         $enseignant->enseignant_email = $request->enseignant_email;
-        $enseignant->enseignant_gender = $request->enseignant_gender;
+        $enseignant->classe = $request->classe;
         $enseignant->enseignant_image = $file_name;
 
         $enseignant->save();
@@ -82,7 +82,7 @@ class EnseignantController extends Controller
 
         $enseignant->enseignant_email = $request->enseignant_email;
 
-        $enseignant->enseignant_gender = $request->enseignant_gender;
+        $enseignant->classe = $request->classe;
 
         $enseignant->enseignant_image = $enseignant_image;
 
